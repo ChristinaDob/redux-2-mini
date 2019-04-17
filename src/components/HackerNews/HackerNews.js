@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Card from './../shared/Card/Card';
 import Loading from './../shared/Loading/Loading';
-// connect is a higher order function that will accept a coponent and return
+// connect is a higher order function that will accept a component and return an ehanced component with state from reducer
 import { connect } from 'react-redux';
+// action creator from reducer that has axios call to get news aricles and put in reducer state
 import { requestArticles } from './../../ducks/hackerNewsReducer';
 
 class HackerNews extends Component {
@@ -12,6 +13,7 @@ class HackerNews extends Component {
   }
 
   componentDidMount() {
+    // requestArticles function from reducer that was mapped to props
     this.props.requestArticles();
   }
 
@@ -29,14 +31,17 @@ class HackerNews extends Component {
   }
 }
 
+// mapStateToProps will map the state in the reducer to the props in this component
 function mapStateToProps(state) {
   return state.hackerNews;
 }
 
+// mapDispatchToProps will map functions imported from the reducer onto the props of this component
 const mapDispatchToProps = {
   requestArticles
 };
 
+// we export the evoked connect component with mapStateToProps, mapDispatchToProps
 export default connect(
   mapStateToProps,
   mapDispatchToProps
